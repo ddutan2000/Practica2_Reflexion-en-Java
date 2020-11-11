@@ -13,14 +13,14 @@ import java.util.List;
  *
  * @author Dutan2000
  */
-public class ControladorUsaurio extends AbstractControladora<Usuario>{
+public class ControladorUsuario extends AbstractControladora<Usuario>{
      private List<Usuario> usuarios;
      private Usuario usuario;
-     private Telefono telefono;
+     //private Telefono telefono;
      private ControladorTelefono controladorT;
 
-    public ControladorUsaurio(ControladorTelefono controladorTelefono) {
-        controladorT=controladorTelefono;
+    public ControladorUsuario() {
+        //controladorT=controladorTelefono;
         usuarios=super.findAll();
     }
     
@@ -50,7 +50,7 @@ public class ControladorUsaurio extends AbstractControladora<Usuario>{
     
     public void deleteTelefono(Telefono telefono1){
         //this.telefono=controladorT.read(telefono1);
-        usuario.deleteTelefono(telefono);
+        usuario.deleteTelefono(telefono1);
         super.update(usuario);
     }
     
