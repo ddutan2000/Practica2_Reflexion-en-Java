@@ -15,10 +15,12 @@ import java.util.List;
 public abstract class AbstractControladora<T> {
     private List<T> lista;
     private T t;
+    private int codigo;
 
 
     public AbstractControladora() {
         lista = new ArrayList<T>();
+        codigo=0;
     }
     
     
@@ -50,6 +52,11 @@ public abstract class AbstractControladora<T> {
     
     public List<T> findAll(){
         return lista;
+    }
+    
+    public int generarCodigo(){
+        int siguientecodigo=codigo++;
+        return siguientecodigo;
     }
     
 }

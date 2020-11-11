@@ -14,16 +14,9 @@ import java.util.List;
  */
 public class ControladorTelefono extends AbstractControladora<Telefono>{
     private List<Telefono> telefonos;
-    private int codigo;
 
     public ControladorTelefono() {
         telefonos= super.findAll();
-        codigo=0;
-    }
-    
-    public int siguienteCodigo(){
-        int ultimoCodigo=++codigo;
-        return ultimoCodigo;
     }
     
     

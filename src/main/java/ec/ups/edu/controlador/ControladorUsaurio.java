@@ -49,7 +49,7 @@ public class ControladorUsaurio extends AbstractControladora<Usuario>{
     }
     
     public void deleteTelefono(Telefono telefono1){
-        this.telefono=controladorT.read(telefono1);
+        //this.telefono=controladorT.read(telefono1);
         usuario.deleteTelefono(telefono);
         super.update(usuario);
     }
