@@ -20,7 +20,7 @@ public class Test {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         ControladorTelefono controladorT = new ControladorTelefono();
-        ControladorUsaurio controladorU = new ControladorUsaurio(controladorT);
+        ControladorUsuario controladorU = new ControladorUsuario();
 
         boolean salir = false;
         int opcion;
