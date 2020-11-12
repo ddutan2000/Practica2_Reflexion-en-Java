@@ -45,6 +45,7 @@ public class MenuTelefono extends javax.swing.JInternalFrame {
     public void cargarSiguienteCodigo(){
         txtCodigo.setText(String.valueOf(controladorT.generarCodigo()));
     }
+    
     public void limpiar(){
         cargarSiguienteCodigo();
         txtNumero.setText("");

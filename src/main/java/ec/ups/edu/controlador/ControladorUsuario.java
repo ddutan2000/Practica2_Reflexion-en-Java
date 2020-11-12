@@ -21,22 +21,23 @@ public class ControladorUsuario extends AbstractControladora<Usuario>{
 
     public ControladorUsuario() {
         //controladorT=controladorTelefono;
-        usuarios=super.findAll();
+            usuarios=super.findAll();
     }
     
     public Usuario autenticar(String correo, String contrasenia){
         for (Usuario usuario1 : usuarios) {
             if(usuario1.getCorreo().equals(correo)&& usuario1.getContrasenia().equals(contrasenia)){
-                this.usuario=usuario1;
+                usuario=usuario1;
+                super.setT(usuario);
                 return usuario1;
             }
         }
         return null;
     }
     
-    public Usuario verUsuario(){
-        return usuario;
-    }
+    /*public Usuario verUsuario(){
+        return usuario=super.verObjeto();
+    }*/
     
     public void crearTelefono(Telefono telefono){
         usuario.createTelefono(telefono);
