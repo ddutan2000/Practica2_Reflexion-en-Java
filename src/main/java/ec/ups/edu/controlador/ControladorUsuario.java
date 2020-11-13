@@ -17,7 +17,7 @@ public class ControladorUsuario extends AbstractControladora<Usuario>{
      private List<Usuario> usuarios;
      private Usuario usuario;
      //private Telefono telefono;
-     private ControladorTelefono controladorT;
+     //private ControladorTelefono controladorT;
 
     public ControladorUsuario() {
         //controladorT=controladorTelefono;
