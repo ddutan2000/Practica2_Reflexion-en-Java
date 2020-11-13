@@ -27,23 +27,25 @@ public class MenuUsuario extends javax.swing.JInternalFrame {
     }
 
     public void cargarDatos(){
-        txtCedula.setText(controladorU.verUsuario().getCedula());
-        txtNombre.setText(controladorU.verUsuario().getNombre());
-        txtApellido.setText(controladorU.verUsuario().getApellido());
-        txtCorreo.setText(controladorU.verUsuario().getCorreo());
-        txtContrasenia.setText(controladorU.verUsuario().getContrasenia());
+        txtID.setText(String.valueOf(controladorU.verObjeto().getId()));
+        txtCedula.setText(controladorU.verObjeto().getCedula());
+        txtNombre.setText(controladorU.verObjeto().getNombre());
+        txtApellido.setText(controladorU.verObjeto().getApellido());
+        txtCorreo.setText(controladorU.verObjeto().getCorreo());
+        txtContrasenia.setText(controladorU.verObjeto().getContrasenia());
     }
     
     public void actualizarVista(){
         DefaultTableModel modelo= (DefaultTableModel)tablaUsuario.getModel();
         modelo.setRowCount(0);
         
-        Object[] fila=new Object[5];
-        fila[0]=controladorU.verUsuario().getCedula();
-        fila[1]=controladorU.verUsuario().getNombre();
-        fila[2]=controladorU.verUsuario().getApellido();
-        fila[3]=controladorU.verUsuario().getCorreo();
-        fila[4]=controladorU.verUsuario().getContrasenia();
+        Object[] fila=new Object[6];
+        fila[0]=controladorU.verObjeto().getId();
+        fila[1]=controladorU.verObjeto().getCedula();
+        fila[2]=controladorU.verObjeto().getNombre();
+        fila[3]=controladorU.verObjeto().getApellido();
+        fila[4]=controladorU.verObjeto().getCorreo();
+        fila[5]=controladorU.verObjeto().getContrasenia();
         
         modelo.addRow(fila);
         
@@ -70,6 +72,8 @@ public class MenuUsuario extends javax.swing.JInternalFrame {
         txtApellido = new javax.swing.JTextField();
         txtContrasenia = new javax.swing.JTextField();
         btnActualizar = new javax.swing.JButton();
+        lblID = new javax.swing.JLabel();
+        txtID = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -118,20 +122,17 @@ public class MenuUsuario extends javax.swing.JInternalFrame {
 
         tablaUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "CEDULA", "NOMBRE", "APELLIDO", "CORREO", "CONTRASEÑA"
+                "ID", "CEDULA", "NOMBRE", "APELLIDO", "CORREO", "CONTRASEÑA"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -144,15 +145,17 @@ public class MenuUsuario extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tablaUsuario);
 
-        txtCedula.setEditable(false);
-        txtCedula.setBackground(new java.awt.Color(204, 204, 204));
-
         btnActualizar.setText("ACTUALIZAR");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
             }
         });
+
+        lblID.setText("ID:");
+
+        txtID.setEditable(false);
+        txtID.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,13 +176,20 @@ public class MenuUsuario extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblID)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(173, 173, 173)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(39, 39, 39)
-                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(39, 39, 39)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -190,24 +200,30 @@ public class MenuUsuario extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(lblConfirguracionDeUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnActualizar)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblID)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblConfirguracionDeUsuario)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lblCedula)
-                                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnActualizar))
-                                .addGap(35, 35, 35))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblCorreo)))
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCedula)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCorreo)))
+                .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addComponent(lblNombre))
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblApellido)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -217,7 +233,7 @@ public class MenuUsuario extends javax.swing.JInternalFrame {
                     .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -229,16 +245,17 @@ public class MenuUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-       if(!txtNombre.getText().isEmpty()&&!txtApellido.getText().isEmpty()&&
+       if(!txtCedula.getText().isEmpty()&&!txtNombre.getText().isEmpty()&&!txtApellido.getText().isEmpty()&&
                !txtCorreo.getText().isEmpty()&&!txtContrasenia.getText().isEmpty()){
+           int numero=Integer.parseInt(txtID.getText());
            String cedula=txtCedula.getText();
            String nombre=txtNombre.getText();
            String apellido=txtApellido.getText();
            String correo=txtCorreo.getText();
            String contrasenia=txtContrasenia.getText();
-           int numero=controladorU.verUsuario().getId();
            usuario= new Usuario(numero, cedula, nombre, apellido, correo, contrasenia);
            controladorU.update(usuario);
+           actualizarVista();
            JOptionPane.showMessageDialog(null, "USUARIOS ACTUALIZADO EXITOSAMENTE");
        }else{
         JOptionPane.showMessageDialog(null, "EXISTEN CAMPOS VACIOS");
@@ -256,12 +273,14 @@ public class MenuUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblConfirguracionDeUsuario;
     private javax.swing.JLabel lblContrasenia;
     private javax.swing.JLabel lblCorreo;
+    private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JTable tablaUsuario;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtContrasenia;
     private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 

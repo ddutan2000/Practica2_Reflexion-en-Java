@@ -115,7 +115,7 @@ public class InicioSession extends javax.swing.JInternalFrame {
             String correo=txtCorreo.getText();
             String contrasenia= txtContrasenia.getText();
             
-          if(controladorU.autenticar(correo, contrasenia)!=null){
+          if(controladorU.imprimirUsuarioReflexion(correo, contrasenia)!=null){
               JOptionPane.showMessageDialog(null, "BIEVENIDO ");
               menuP.getTabMenu().setVisible(true);
               menuP.getCerrarSession().setVisible(true);

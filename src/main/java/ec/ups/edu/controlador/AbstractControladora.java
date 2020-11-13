@@ -5,8 +5,12 @@
  */
 package ec.ups.edu.controlador;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -36,7 +40,8 @@ public abstract class AbstractControladora<T> {
         for (int i = 0; i < lista.size(); i++) {
             T objeto1=lista.get(i);
             if(objeto1.equals(objeto)){
-        lista.add(i, objeto);
+            lista.set(i, objeto);
+            t=objeto;
                 break;
             }
         }
@@ -55,8 +60,20 @@ public abstract class AbstractControladora<T> {
     }
     
     public int generarCodigo(){
-        int siguientecodigo=codigo++;
+        int siguientecodigo=++codigo;
         return siguientecodigo;
+    }
+    
+    public T verObjeto(){
+        return t;
+    }
+
+    public T getT() {
+        return t;
+    }
+
+    public void setT(T t) {
+        this.t = t;
     }
     
 }

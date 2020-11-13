@@ -52,7 +52,8 @@ public class Test {
                         System.out.println("INGRESE SU CORREO Y CONTRASEÑA:");
                         String correo1 = input.next();
                         String contrasenia1 = input.next();
-                        if (controladorU.autenticar(correo1, contrasenia1) != null) {
+                        if (controladorU.imprimirUsuarioReflexion(correo1, contrasenia1) != null) 
+                        {
                             System.out.println("BIENVENIDO \nQUE DESEA HACER? ");
                             int opcion1;
                             boolean salir1=false;

@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-//import javax.swing.table.TableModel;
+
 
 /**
  *
@@ -28,8 +28,7 @@ public class ListarUsuarios extends javax.swing.JInternalFrame {
     public ListarUsuarios(ControladorUsuario controladorUsuario, ControladorTelefono controladorTelefono) {
         initComponents();
         controlG=controladorTelefono;
-        controladorU=controladorUsuario;
-        
+        controladorU=controladorUsuario; 
     }
 
 
@@ -61,6 +60,37 @@ public class ListarUsuarios extends javax.swing.JInternalFrame {
             modelo.addRow(fila);
         }
         tablaTelefonos.setModel(modelo);
+    }
+    
+    public void TodosLosUsuarios(Collection<Usuario> usuarios){
+        DefaultTableModel modelo= (DefaultTableModel)tablaUsuarios.getModel();
+        modelo.setRowCount(0);
+        
+        for (Usuario usuario : usuarios) {
+            Object[] fila=new Object[5];
+            fila[0]=usuario.getId();
+            fila[1]=usuario.getCedula();
+            fila[2]=usuario.getNombre();
+            fila[3]=usuario.getApellido();
+            fila[4]=usuario.getCorreo();
+            modelo.addRow(fila);
+        }
+        tablaUsuarios.setModel(modelo);
+    }
+    
+    public void actualizarVistaUsuario(Usuario usuario){
+       DefaultTableModel modelo= (DefaultTableModel)tablaUsuarios.getModel();
+        modelo.setRowCount(0); 
+        
+        Object[] fila = new Object[5];
+        fila[0]=usuario.getId();
+        fila[1]=usuario.getCedula();
+        fila[2]=usuario.getNombre();
+        fila[3]=usuario.getApellido();
+        fila[4]=usuario.getCorreo();
+        modelo.addRow(fila);
+        
+        tablaUsuarios.setModel(modelo);
     }
     
     public void limpiar(){
@@ -220,8 +250,21 @@ public class ListarUsuarios extends javax.swing.JInternalFrame {
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         Collection<Telefono> telefonos= controlG.findAll();
-        TodosLosTelefonos(telefonos);
-        limpiar();
+        Collection<Usuario> usuarios=controladorU.findAll();
+        String tipo =cmbxTipoDeBusqueda.getSelectedItem().toString();
+        switch (tipo){
+            case "--SELECIONAR--":
+                JOptionPane.showMessageDialog(null, "DEBE SELECIONAR UNA OPCION");
+                break;
+            case "TELEFONO": 
+             TodosLosTelefonos(telefonos); 
+            break;
+            case "USUARIO":
+              TodosLosUsuarios(usuarios);
+                break;
+        }
+        
+        cmbxTipoDeBusqueda.setSelectedIndex(0);
         
     }//GEN-LAST:event_btnListarActionPerformed
 
@@ -230,9 +273,9 @@ public class ListarUsuarios extends javax.swing.JInternalFrame {
         if(!txtCedula.getText().isEmpty()){
             usuario=new Usuario(Integer.parseInt(txtCedula.getText()), null, null, null, null, null);
             Usuario u=controladorU.read(usuario);
-            if (u!= null){
-            txtCedula.setText(u.getCedula());
+            if (u != null){            
             actualizarVista(u.listarTelefonos());
+            actualizarVistaUsuario(u);
             }else{
                 JOptionPane.showMessageDialog(null, "NO SE HA ENCONTRADO EL USUARIO");
             }
