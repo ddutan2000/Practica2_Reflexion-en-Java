@@ -6,8 +6,12 @@
 package ec.ups.edu.controlador;
 
 import ec.ups.edu.modelo.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,7 +27,7 @@ public class ControladorUsuario extends AbstractControladora<Usuario>{
         //controladorT=controladorTelefono;
             usuarios=super.findAll();
     }
-    
+    /*
     public Usuario autenticar(String correo, String contrasenia){
         for (Usuario usuario1 : usuarios) {
             if(usuario1.getCorreo().equals(correo)&& usuario1.getContrasenia().equals(contrasenia)){
@@ -33,11 +37,34 @@ public class ControladorUsuario extends AbstractControladora<Usuario>{
             }
         }
         return null;
+    }*/
+    
+    public Usuario imprimirUsuarioReflexion(String correo,String contrasenia){
+        for (Object object : usuarios) {
+            Method[] metodos = object.getClass().getMethods();
+            for(Method m: metodos){
+                if (m.getName().equals("getCorreo")){
+                    try {
+                        if(m.invoke(object, null).equals(correo)){
+                            for (Method m1 : metodos) {
+                                if(m1.getName().equals("getContrasenia")){
+                                    if(m1.invoke(object, null).equals(contrasenia)){
+                                        usuario=(Usuario)object;
+                                        super.setT(usuario);
+                                        return (Usuario)object;
+                                    }       
+                                }
+                            }
+                        }
+                    } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                        Logger.getLogger(ControladorUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+        return null;
     }
     
-    /*public Usuario verUsuario(){
-        return usuario=super.verObjeto();
-    }*/
     
     public void crearTelefono(Telefono telefono){
         usuario.createTelefono(telefono);
